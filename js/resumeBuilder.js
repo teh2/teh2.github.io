@@ -169,7 +169,8 @@ var education = {
 			"logo":"images/UofI_logo.jpg",
 			"degree":"BS",
 			"majors":["Computer Science", "Electronic Music"],
-			"datesAttended":"1979-1983"
+			"datesAttended":"1979-1983",
+			"url":"http://illinois.edu"
 		},
 		{
 			"name":"University of Illinois",
@@ -177,7 +178,8 @@ var education = {
 			"logo":"images/UofI_logo.jpg",
 			"degree":"MS-partial",
 			"majors":["Computer Science"],
-			"datesAttended":"2000-2003"
+			"datesAttended":"2000-2003",
+			"url":"http://illinois.edu"
 		},
 		{
 			"name":"Udacity",
@@ -185,7 +187,8 @@ var education = {
 			"logo":"images/Udacity_logo.jpg",
 			"degree":"NanoDegree",
 			"majors":["Front End Web Developer"],
-			"datesAttended":"2014"
+			"datesAttended":"2014",
+			"url":"https://www.udacity.com"
 		}
 	],
 	"onlineCourses": [
@@ -212,6 +215,24 @@ var education = {
 			"school":"Udacity",
 			"datesAttended":"2014",
 			"url":"https://www.udacity.com/course/ud804"
+		},
+		{
+			"title":"Intro to jQuery",
+			"school":"Udacity",
+			"datesAttended":"2014",
+			"url":"https://www.udacity.com/course/ud245"
+		},
+		{
+			"title":"Object-Oriented JavaScript",
+			"school":"Udacity",
+			"datesAttended":"2014",
+			"url":"https://www.udacity.com/course/ud015"
+		},
+		{
+			"title":"HTML5 Canvas",
+			"school":"Udacity",
+			"datesAttended":"2014",
+			"url":"https://www.udacity.com/course/ud292"
 		}
 	]};
 
@@ -221,7 +242,7 @@ education.display = function() {
 			$("#education").append(HTMLschoolStart);
 			var school = education.schools[schoolIndex];
 			$(".education-entry:last").append(
-				HTMLschoolName.replace("%data%", school.name) +
+				HTMLschoolName.replace("%data%", school.name).replace("%url%", school.url) +
 				HTMLschoolDegree.replace("%data%", school.degree));
 			$(".education-entry:last").append(HTMLschoolDates.replace("%data%", school.datesAttended));
 			$(".education-entry:last").append(HTMLschoolLocation.replace("%data%", school.location));
@@ -236,10 +257,13 @@ education.display = function() {
 			$("#education").append(HTMLschoolStart);
 			var course = education.onlineCourses[courseIndex];
 			$(".education-entry:last").append(
-				HTMLonlineTitle.replace("%data%", course.title) +
+				HTMLonlineTitle.replace("%data%", course.title).replace("%url%", course.url) +
 				HTMLonlineSchool.replace("%data%", course.school));
 			$(".education-entry:last").append(HTMLonlineDates.replace("%data%", course.datesAttended));
-			$(".education-entry:last").append(HTMLonlineURL.replace("%data%", course.url));
+			if (courseIndex < (education.onlineCourses.length - 1)) {
+				$(".education-entry:last").append("<br>");
+			};
+//			$(".education-entry:last").append(HTMLonlineURL.replace("%data%", course.url).replace("%url%", course.url));
 		}
 	}
 };
