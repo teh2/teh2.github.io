@@ -131,13 +131,20 @@ var projects = {
 			"datesWorked": "2008-2014",
 			"description": "An interactive Voice Response application for making phone bill payments on the phone",
 			"images": ["images/sep1.jpg"]
-			},
+		},
 		{
 			"title": "CPOT - Complex Product Ordering Tool",
 			"datesWorked": "1998-2004",
 			"description": "A dynamic, data driven, web app for preparing complex telecom orders.",
 			"images": ["images/cpot1.jpg", "images/cpot2.jpg"]
-			}
+		},
+		{
+			"title": "LadyBugger",
+			"datesWorked": "2014",
+			"description": "A class project for the Udacity FrontEnd Web Developer-NanoDegree program. This project is the culmuination of the Object Oriented JavaScript and HTML5 Canvas classes. It implements as simple HTML5 based game program that loosely resembles the classic 'Frogger' arcade game.",
+			"images": ["LadyBugger/images/enemy-bug.png", "LadyBugger/images/char-boy.png"],
+			"url":"LadyBugger/LadyBugger.html"
+		}
 	]};
 
 projects.display = function() {
@@ -145,7 +152,7 @@ projects.display = function() {
 	{
 		$("#projects").append(HTMLprojectStart);
 		var theProject = projects.projects[projectIndex];
-		$(".project-entry:last").append(HTMLprojectTitle.replace("%data%", theProject.title));
+		$(".project-entry:last").append(HTMLprojectTitle.replace("%data%", theProject.title).replace("%url%", theProject.url));
 		$(".project-entry:last").append(HTMLprojectDates.replace("%data%", theProject.datesWorked));
 		$(".project-entry:last").append(HTMLprojectDescription.replace("%data%", theProject.description));
 		if (0 < theProject.images.length) {
