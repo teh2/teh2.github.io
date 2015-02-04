@@ -148,7 +148,7 @@ var projects = {
 		{
 			"title": "Optimization",
 			"datesWorked": "2014-2015",
-			"description": "Another class project for the Udacity FrontEnd Web Developer-NanoDegree program. This project shows the fruits of the "Website Performance Optimization" project. The pages here were provided by the instructor. We were told to optimize them in various ways, including restructuring the HTML and CSS, rewriting the JS for efficiency, compressing images, minifying code, etc. I also took the chance to learn Gulp - a build tool currently in vogue for wrangling web site code and other assets.",
+			"description": "Another class project for the Udacity FrontEnd Web Developer-NanoDegree program. This project shows the fruits of the 'Website Performance Optimization' project. The pages here were provided by the instructor. We were told to optimize them in various ways, including restructuring the HTML and CSS, rewriting the JS for efficiency, compressing images, minifying code, etc. I also took the chance to learn Gulp - a build tool currently in vogue for wrangling web site code and other assets.",
 			"images": ["Optimization/img/mobilewebdev.jpg", "Optimization/img/profilepic.jpg"],
 			"url":"Optimization/index.html"
 		}
