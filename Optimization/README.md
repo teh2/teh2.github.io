@@ -1,3 +1,51 @@
+frontend-nanodegree-mobile-portfolio
+===============================
+Mobile Portfolio is a class project for the Udacity frontend nanodegree.
+
+If you just want to see it run, you can check it out at:
+- https://teh2.github.io/Optimization/index.html
+which is a horribly simple html page that points to the various versions of the portfolio, with and without optimizations. For convenience, I'll list those versions here too:
+1. [The original code](https://github.com/udacity/frontend-nanodegree-mobile-portfolio)
+1. [my intermediate code](https://github.com/udacity/frontend-nanodegree-mobile-portfolio) - after clean up, but before build.
+1. [my final code](https://github.com/udacity/frontend-nanodegree-mobile-portfolio/tree/master/build) - after migrating the whole thing to gulp to standardize building.
+ 
+In order to make this code run, you'll need to
+* grab the code from the github repo
+* put it somewhere where your local web server can see it.
+
+Note: it doesn't run particularly well by just opening index.html locally in a browser, so I have included a small file next to index.html, called server.js, which contains the code  that I use locally to run it on a node.js server. If you are running node.js, fire up server.js under node, and go to http://localhost:3000/index.html. If you have a different preferred web server that you use locally, feel free to skip node.js and my simple server.js file.
+
+In the process of completing this project, I used numerous references. The most significant were:
+* The original project code from the git repository at: https://github.com/udacity/frontend-nanodegree-mobile-portfolio
+* The chrome Canary version, for its developer tools:
+* webpagetest.org for some benchmarking: http://webpagetest.org
+* I originally went through several painful steps of trying to compress the images.
+  * I got info about using jpegtran from: http://blarg.co.uk/blog/comparison-of-jpeg-lossless-compression-tools
+  * I also tried File Optimizer, which I read good things about here: http://www.creativebloq.com/design/image-compression-tools-1132865
+  * and downloaded from here:  http://nikkhokkho.sourceforge.net/static.php?page=FileOptimizer
+* I spent a lot of time reading about optimization at Google's analytics pages: https://developers.google.com/analytics/devguides/collection/analyticsjs/pages
+* I spent a great deal of time asking Google's PageSpeed  Insights to run my page: https://developers.google.com/speed/pagespeed/insights/
+* In order to make my pages available over the internet so that Insights could get at them, I used ngrok: https://ngrok.com/
+* I read a boatload of pages about the critical rendering path:
+  * http://www.stevesouders.com/blog/2009/05/18/flushing-the-document-early/
+  * https://developers.google.com/web/fundamentals/performance/critical-rendering-path/
+  * https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp
+  * https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path
+* And bunches of other pages about speeding up rendering:
+  * http://andydavies.me/blog/2013/10/22/how-the-browser-pre-loader-makes-pages-load-faster/
+  * https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer#minification-preprocessing--context-specific-optimizations
+  * https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css
+* After getting a good handle on the various types of optimizations, I spent a bunch of time learning all about gulp and various gulp plugins:
+  * gulp: http://gulpjs.com/
+  * examples of using gulp tasks: http://julienrenaux.fr/2014/05/25/introduction-to-gulp-js-with-practical-examples/
+  * finding gulp packages at npm: https://www.npmjs.com
+  * late in the process, I needed a text replacement task: https://www.npmjs.com/package/gulp-replace
+  * Which caused me to need some info about regular expressions: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+
+
+----
+The original version of this readme contained the following text:
+
 ## Website Performance Optimization portfolio project
 
 Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
