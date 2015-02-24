@@ -1,13 +1,22 @@
-frontend-nanodegree-mobile-portfolio
-===============================
+#frontend-nanodegree-mobile-portfolio
 Mobile Portfolio is a class project for the Udacity frontend nanodegree.
 
+----
+#Contents
+* [Run it](#run-it)
+* [The Project](#the-project)
+* [References](#references)
+* [Original ReadMe](#original-readme)
+
+----
+# Run it
 If you just want to see it run, you can check it out at:
 - https://teh2.github.io/Optimization/index.html
 which is a horribly simple html page that points to the various versions of the portfolio, with and without optimizations. For convenience, I'll list those versions here too:
 1. [The original code](https://github.com/udacity/frontend-nanodegree-mobile-portfolio)
 1. [my intermediate code](https://github.com/udacity/frontend-nanodegree-mobile-portfolio) - after clean up, but before build.
 1. [my final code](https://github.com/udacity/frontend-nanodegree-mobile-portfolio/tree/master/build) - after migrating the whole thing to gulp to standardize building.
+1. [Final running version](https://teh2.github.io/Optimization/build/index.html) - this is the page to feed to Google's PageSpeed Insights!
  
 In order to make this code run, you'll need to
 * grab the code from the github repo
@@ -15,6 +24,38 @@ In order to make this code run, you'll need to
 
 Note: it doesn't run particularly well by just opening index.html locally in a browser, so I have included a small file next to index.html, called server.js, which contains the code  that I use locally to run it on a node.js server. If you are running node.js, fire up server.js under node, and go to http://localhost:3000/index.html. If you have a different preferred web server that you use locally, feel free to skip node.js and my simple server.js file.
 
+----
+# The Project
+The point of this project was to optimize the provided web site. There were several parts of the web site that needed optimizing:
+* the CRP (Critical Rendering Path) on the main index.html page needed modifications to achieve a PageSpeed score of at least 90.
+  * Force Async loading of some of the JS code.
+  * Add Media=print to force the print related CSS to only load for printing.
+  * Inline the critical CSS and move the loading of the rest into a script so it loads after the initial page load.
+  * compress images to minimize bytes transferred.
+* Optimize the scrolling framerate on the Pizza.html page.
+  * This involves changing the JS code in the updatePositions function.
+  * What I did here was to pull the code out of the for loop that calculates the phase change amount for each of the five pizza positions and create a small list of those five amounts.
+  * Then I simply added the correct phase amount to each of the pizzas.
+  * I also changed out the querySelectorAll call for an equivalent getElementsByClassName call, because it's faster.
+  * Next, I determined that most of the pizzas were off the bottom of the visible page and so I did a calculation to see if the pizza was visible or not, and then stopping the loop after the first pizza that was not visible.
+* Optimize the time to resize the pizza images on the pizza.html page.
+  * This involves changing the JS code in the changePizzaSizes function.
+  * Originally, all of the code was inside the for loop, meaning it got executed once for each and every pizza image on the page.
+  * It's much faster to pull as much of the code out of the for loop as possible, and only update the actual image size inside the loop.
+  * I also changed out the querySelectorAll call for an equivalent getElementsByClassName call, because it's faster.
+  * unfortunately, I can't pull the same "short circuit" trick here as in the animated background image code, because these pizzas actually move up and down with the scrolling, and they all eventually become visible.
+* Optimize the overall site loading (content efficiency).
+  * For this, I used Gulp to automate the build process and standardize the optimizations
+  * gulp supplies countless building blocks that can be chained together to make modifications to the source files of your site. I used:
+    * uglify - compress JS files.
+	* minify-html - compress html files.
+	* minify-css - compress css files.
+	* image-optimization - compress images.
+	* and several others that make things easier and more consistent.
+  * take a look at gulpfile.js for some useful tips and tricks!
+
+----
+# References
 In the process of completing this project, I used numerous references. The most significant were:
 * The original project code from the git repository at: https://github.com/udacity/frontend-nanodegree-mobile-portfolio
 * The chrome Canary version, for its developer tools:
@@ -42,8 +83,8 @@ In the process of completing this project, I used numerous references. The most 
   * late in the process, I needed a text replacement task: https://www.npmjs.com/package/gulp-replace
   * Which caused me to need some info about regular expressions: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
 
-
 ----
+# Original README
 The original version of this readme contained the following text:
 
 ## Website Performance Optimization portfolio project

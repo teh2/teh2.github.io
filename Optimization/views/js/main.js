@@ -449,9 +449,11 @@ var resizePizzas = function(size) {
   }
 
   // Iterates through pizza elements on the page and changes their widths
-  //Note: refactored repeated code out of the for loop to minimize time to resize pizzas.
+  //Note: refactored repeated code out of the for loop to minimize time
+  //  to resize pizzas. Also switched out the querySelectorAll for
+  //  getElementsByClassName.
   function changePizzaSizes(size) {
-	var pizzaContainers = document.querySelectorAll(".randomPizzaContainer");
+	var pizzaContainers = document.getElementsByClassName("randomPizzaContainer");
     var dx = determineDx(pizzaContainers[0], size);
     var newwidth = (pizzaContainers[0].offsetWidth + dx) + 'px';
     for (var i = 0; i < pizzaContainers.length; i++) {
@@ -501,17 +503,30 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 // Moves the sliding background pizzas based on scroll position
 //Note: Moved redundant code out of for loop to speed up rendering.
+// Also switched out the querySelectorAll for getElementsByClassName.
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
   var phase = new Array(5);
+  var sTop = document.body.scrollTop / 1250;
   for (var j = 0; j < 5; j++) {
-    phase[j] = 100 * Math.sin((document.body.scrollTop / 1250) + j);
+    phase[j] = 100 * Math.sin(sTop + j);
+//    phase[j] = 100 * Math.sin((document.body.scrollTop / 1250) + j);
   }
   for (var i = 0; i < items.length; i++) {
-    items[i].style.left = items[i].basicLeft + phase[i % 5] + 'px';
+	//Check to see if the current item is visible or not
+	if (items[i].isOnscreen)
+	{
+	  //Visible, so move it.
+      items[i].style.left = items[i].basicLeft + phase[i % 5] + 'px';
+	}
+	else
+	{
+	  //might as well quit, because the rest of them aren't on screen.
+	  i = items.length;
+	}
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -522,6 +537,26 @@ function updatePositions() {
     var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
     logAverageFrame(timesToUpdatePosition);
   }
+}
+
+//Run through the whole set of animation pizza images and set the flag
+//that tells if they are onscreen or not
+function checkMoverVisibility() {
+  var items = document.getElementsByClassName('mover');
+  for (var i = 0; i < items.length; i++) {
+    setIsOnscreen(items[i]);
+  }
+}
+
+//check the window viewport and see if the given element is within the
+//bounds. (Note: we're only concerned with vertical visiblity, because
+//of the animation moving them left and right.) Why? Because we don't
+//want to bother moving it around if the user can't see it.
+//Note: code borrowed from stackoverflow and modified to fit our needs
+function setIsOnscreen(elem) {
+	var rect = elem.getBoundingClientRect();
+
+	elem.isOnscreen = (rect.top  <= (window.innerHeight || document.documentElement.clientHeight));
 }
 
 // runs updatePositions on scroll
@@ -543,3 +578,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   updatePositions();
 });
+
+//When the window first becomes visible, and whenever it changes size
+// we need to recalculate the visibility flags for each movable image
+window.addEventListener('pageshow', checkMoverVisibility);
+window.addEventListener('resize', checkMoverVisibility);
+
