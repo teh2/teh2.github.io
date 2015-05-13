@@ -128,7 +128,7 @@ var projects = {
 	"projects": [
 		{
 			"title": "SEP - Speech Enterprise Payments",
-			"datesWorked": "2008-2014",
+			"datesWorked": "2008-2015",
 			"description": "An interactive Voice Response application for making phone bill payments on the phone",
 			"images": ["images/sep1.jpg"]
 		},
@@ -151,6 +151,13 @@ var projects = {
 			"description": "Another class project for the Udacity FrontEnd Web Developer-NanoDegree program. This project shows the fruits of the 'Website Performance Optimization' project. The pages here were provided by the instructor. We were told to optimize them in various ways, including restructuring the HTML and CSS, rewriting the JS for efficiency, compressing images, minifying code, etc. I also took the chance to learn Gulp - a build tool currently in vogue for wrangling web site code and other assets.",
 			"images": ["Optimization/img/mobilewebdev.jpg", "Optimization/img/profilepic.jpg"],
 			"url":"Optimization/index.html"
+		},
+		{
+			"title": "Fishmap",
+			"datesWorked": "2015",
+			"description": "Another class project for the Udacity FrontEnd Web Developer-NanoDegree program. This project shows the fruits of the 'Intro to Ajax' and 'JavaScript Design Patterns' classes. This project was almost completely open ended. The requirements were to mash up GoogleMaps API with some other API of our choosing. I chose both the Flickr and Panoramio APIs. My impetus for the project choice was that I really didn't like the way that the ifishillinois.org web site presented the myriad of lakes in the state of illinois, and I thought they could be presented in a more useful manner.",
+			"images": ["Fishmap/images/fishicon.png", "Fishmap/images/unkfishicon.png"],
+			"url":"Fishmap/index.html"
 		}
 	]};
 
@@ -247,6 +254,18 @@ var education = {
 			"school":"Udacity",
 			"datesAttended":"2014",
 			"url":"https://www.udacity.com/course/ud292"
+		},
+		{
+			"title":"Intro to Ajax",
+			"school":"Udacity",
+			"datesAttended":"2015",
+			"url":"https://www.udacity.com/course/ud110"
+		},
+		{
+			"title":"JavaScript Design Patterns",
+			"school":"Udacity",
+			"datesAttended":"2015",
+			"url":"https://www.udacity.com/course/ud989"
 		}
 	]};
 
